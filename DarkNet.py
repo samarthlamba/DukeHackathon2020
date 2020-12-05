@@ -1,15 +1,16 @@
-# Bruno Capuano 2020
-# display the camera feed using OpenCV
-# display FPS
-# load YOLO object detector trained with COCO Dataset (80 classes)
-# analyze each camera frame using YoloV3 searching for banana classes
-
 import numpy as np
 import time
 import cv2
 import os
 from collections import Counter
+import gtts 
+from playsound import playsound 
+from collections import Counter
+
+localObjects = []
 objects = []
+oldBoxCount = 0
+
 def initYoloV3():
     global labelColors, layerNames, net
     
@@ -38,13 +39,20 @@ def toSpeech(objectArray):
             speech = speech + str(objectArray.count(k)) + " " + str(k) + ", " + "and "
     if(speech[-4: len(speech)] == "and "):
             speech = speech[0: len(speech)-6]
+    sound_request = gtts.gTTS(speech)
+    if os.path.exists("narration.mp3"):
+        os.remove("narration.mp3")
+    sound_request.save("narration.mp3")
+    playsound("narration.mp3")
     return speech
             
 def analyzeFrame(frame, displayBoundingBox = True, displayClassName = True, displayConfidence = True):
-
-    global H, W
-    localObjects = []
+    print("analyzeFrame started")
+    global H, W, localObjects, oldBoxCount
+    
     # init
+    oldLocalObjectsLength = len(localObjects)
+    localObjects = []
     if W is None or H is None:
         (H, W) = frame.shape[:2]
     if net is None:
@@ -78,26 +86,29 @@ def analyzeFrame(frame, displayBoundingBox = True, displayClassName = True, disp
                 confidences.append(float(confidence))
                 classIDs.append(classID)
 
-    idxs = cv2.dnn.NMSBoxes(boxes, confidences, confidenceDef, thresholdDef)
+    if(len(boxes) != oldBoxCount): 
+        idxs = cv2.dnn.NMSBoxes(boxes, confidences, confidenceDef, thresholdDef)
 
-    if len(idxs) > 0:
-        for i in idxs.flatten():
-            (x, y) = (boxes[i][0], boxes[i][1])
-            (w, h) = (boxes[i][2], boxes[i][3])
+        if len(idxs) > 0:
+            for i in idxs.flatten():
+                # (x, y) = (boxes[i][0], boxes[i][1])
+                # (w, h) = (boxes[i][2], boxes[i][3])
 
-            if (displayBoundingBox):
-                color = [int(c) for c in labelColors[classIDs[i]]]
-                cv2.rectangle(frame, (x, y), (x + w, y + h), color, 2)
-            if(displayClassName and displayConfidence):
-                text = "{}: {:.4f}".format(Labels[classIDs[i]], confidences[i])
-                cv2.putText(frame, text, (x, y - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
-            elif(displayClassName):
-                text = str(f"{Labels[classIDs[i]]}:")
-                cv2.putText(frame, text, (x, y - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
-            localObjects.append(Labels[classIDs[i]])
-            counter(objects, localObjects)
-        
-        print(objects);
+                # if (displayBoundingBox):
+                #     color = [int(c) for c in labelColors[classIDs[i]]]
+                #     cv2.rectangle(frame, (x, y), (x + w, y + h), color, 2)
+                # if(displayClassName and displayConfidence):
+                #     text = "{}: {:.4f}".format(Labels[classIDs[i]], confidences[i])
+                #     cv2.putText(frame, text, (x, y - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
+                # elif(displayClassName):
+                #     text = str(f"{Labels[classIDs[i]]}:")
+                #     cv2.putText(frame, text, (x, y - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
+                localObjects.append(Labels[classIDs[i]])
+                counter(objects, localObjects)
+        if(len(localObjects) != oldLocalObjectsLength):   
+            toSpeech(localObjects)
+        print(localObjects)
+        oldBoxCount = len(boxes)
 
 
 # Camera Settings
@@ -105,7 +116,7 @@ camera_Width  = 640 # 1024 # 1280 # 640
 camera_Heigth = 480 # 780  # 960  # 480
 frameSize = (camera_Width, camera_Heigth)
 video_capture = cv2.VideoCapture(1)
-time.sleep(2.0)
+# time.sleep(2.0)
 (W, H) = (None, None)
 
 # YOLO Settings
@@ -123,23 +134,23 @@ i = 0
 lastAmount = len(objects)
 detectionEnabled = True
 while True:
-    i = i + 1 
-    start_time = time.time()
+    # i = i + 1 
+    # start_time = time.time()
 
     ret, frameOrig = video_capture.read()
     frame = cv2.resize(frameOrig, frameSize)
 
     if(detectionEnabled):
         analyzeFrame(frame)
-    if(lastAmount != len(objects)):
-        lastAmount = len(objects);
-        print(toSpeech(objects));
-    if (time.time() - start_time ) > 0:
-        fpsInfo = "FPS: " + str(1.0 / (time.time() - start_time)) # FPS = 1 / time to process loop
-        font = cv2.FONT_HERSHEY_DUPLEX
-        cv2.putText(frame, fpsInfo, (10, 20), font, 0.4, (255, 255, 255), 1)
+    # if(lastAmount != len(objects)):
+    #     lastAmount = len(objects);
+    #     # print(toSpeech(objects));
+    # if (time.time() - start_time ) > 0:
+    #     fpsInfo = "FPS: " + str(1.0 / (time.time() - start_time)) # FPS = 1 / time to process loop
+    #     font = cv2.FONT_HERSHEY_DUPLEX
+    #     cv2.putText(frame, fpsInfo, (10, 20), font, 0.4, (255, 255, 255), 1)
 
-    cv2.imshow('@elbruno - YoloV3 Object Detection', frame)
+    #cv2.imshow('@elbruno - YoloV3 Object Detection', frame)
 
     # key controller
     key = cv2.waitKey(1) & 0xFF    
