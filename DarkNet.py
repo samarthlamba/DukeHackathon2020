@@ -34,12 +34,11 @@ def toSpeech(objectArray):
     speech = "There are "
     for k in objectArray:
         wroteObject.append(k);
-        speech = speech + objectArray.count(k) + " " + k + ", " + "and "
-    if(speech[end-3: end] == "and"):
-            speech = speech[0: end-3]
+        speech = speech + str(objectArray.count(k)) + " " + str(k) + ", " + "and "
+    if(speech[-4: len(speech)] == "and "):
+            speech = speech[0: len(speech)-5]
+    return speech
             
-    
-    return speech;
 def analyzeFrame(frame, displayBoundingBox = True, displayClassName = True, displayConfidence = True):
     global H, W
     localObjects = []
