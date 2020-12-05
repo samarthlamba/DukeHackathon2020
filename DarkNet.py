@@ -21,10 +21,17 @@ def initYoloV3():
     layerNames = net.getLayerNames()
     layerNames = [layerNames[i[0] - 1] for i in net.getUnconnectedOutLayers()]
 
-
+def counter(largeObject, localObject):
+    for k in localObject:
+        if(localObject.count(k) > largeObject.count(k)):
+            while(localObject.count(k) != largeObject.count(k)):
+                largeObject.append(k)
+                
+                
+                
 def analyzeFrame(frame, displayBoundingBox = True, displayClassName = True, displayConfidence = True):
     global H, W
-    
+    localObjects = []
     # init
     if W is None or H is None:
         (H, W) = frame.shape[:2]
@@ -75,9 +82,10 @@ def analyzeFrame(frame, displayBoundingBox = True, displayClassName = True, disp
             elif(displayClassName):
                 text = str(f"{Labels[classIDs[i]]}:")
                 cv2.putText(frame, text, (x, y - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
-            if(Labels[classIDs[i]] not in objects):
-                objects.append(Labels[classIDs[i]]);
-            print(objects);
+            localObjects.append(Labels[classIDs[i]])
+            counter(objects, localObjects)
+        
+        print(objects);
 
 
 # Camera Settings
@@ -131,3 +139,6 @@ while True:
 
 video_capture.release()
 cv2.destroyAllWindows()
+
+
+
