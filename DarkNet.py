@@ -7,7 +7,6 @@ import gtts
 from playsound import playsound 
 from collections import Counter
 
-
 localObjects = []
 objects = []
 oldBoxCount = 0
