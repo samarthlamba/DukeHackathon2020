@@ -8,6 +8,7 @@ import numpy as np
 import time
 import cv2
 import os
+from collections import Counter
 objects = []
 def initYoloV3():
     global labelColors, layerNames, net
@@ -28,7 +29,17 @@ def counter(largeObject, localObject):
                 largeObject.append(k)
                 
                 
-                
+def toSpeech(objectArray):
+    wroteObject = []
+    speech = "There are "
+    for k in objectArray:
+        wroteObject.append(k);
+        speech = speech + objectArray.count(k) + " " + k + ", " + "and "
+    if(speech[end-3: end] == "and"):
+            speech = speech[0: end-3]
+            
+    
+    return speech;
 def analyzeFrame(frame, displayBoundingBox = True, displayClassName = True, displayConfidence = True):
     global H, W
     localObjects = []
