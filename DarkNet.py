@@ -41,6 +41,7 @@ def toSpeech(objectArray):
     return speech
             
 def analyzeFrame(frame, displayBoundingBox = True, displayClassName = True, displayConfidence = True):
+
     global H, W
     localObjects = []
     # init
@@ -119,6 +120,7 @@ labelColors   = (None)
 layerNames    = (None)
 
 i = 0
+lastAmount = len(objects)
 detectionEnabled = True
 while True:
     i = i + 1 
@@ -129,7 +131,9 @@ while True:
 
     if(detectionEnabled):
         analyzeFrame(frame)
-
+    if(lastAmount != len(objects)):
+        lastAmount = len(objects);
+        print(toSpeech(objects));
     if (time.time() - start_time ) > 0:
         fpsInfo = "FPS: " + str(1.0 / (time.time() - start_time)) # FPS = 1 / time to process loop
         font = cv2.FONT_HERSHEY_DUPLEX
