@@ -31,6 +31,7 @@ def counter(largeObject, localObject):
                 largeObject.append(k)
                 
                 
+                
 def toSpeech(objectArray):
     wroteObject = []
     speech = "There are "
