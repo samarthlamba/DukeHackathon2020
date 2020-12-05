@@ -11,6 +11,7 @@ localObjects = []
 objects = []
 oldBoxCount = 0
 
+
 def initYoloV3():
     global labelColors, layerNames, net
     
