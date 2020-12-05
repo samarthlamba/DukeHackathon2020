@@ -97,7 +97,7 @@ labelColors   = (None)
 layerNames    = (None)
 
 i = 0
-detectionEnabled = False
+detectionEnabled = True
 while True:
     i = i + 1 
     start_time = time.time()
