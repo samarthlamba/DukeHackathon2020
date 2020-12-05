@@ -8,7 +8,7 @@ import numpy as np
 import time
 import cv2
 import os
-
+objects = []
 def initYoloV3():
     global labelColors, layerNames, net
     
@@ -75,6 +75,9 @@ def analyzeFrame(frame, displayBoundingBox = True, displayClassName = True, disp
             elif(displayClassName):
                 text = str(f"{Labels[classIDs[i]]}:")
                 cv2.putText(frame, text, (x, y - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
+            if(Labels[classIDs[i]] not in objects):
+                objects.append(Labels[classIDs[i]]);
+            print(objects);
 
 
 # Camera Settings
