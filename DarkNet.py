@@ -32,6 +32,7 @@ def counter(largeObject, localObject):
                 
                 
                 
+                
 def toSpeech(objectArray):
     wroteObject = []
     speech = "There are "
