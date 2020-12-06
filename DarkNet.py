@@ -8,14 +8,30 @@ from collections import Counter
 import gtts 
 from playsound import playsound 
 from collections import Counter
+import tkinter as tk
+from tkinter import *
+from PIL import ImageTk, Image
 
 localObjects = []
 objects = []
 oldBoxCount = 0
-
+video_capture = None
+frameSize = None
+W = None
+H = None
+# YOLO Settings
+weightsPath   = "yolov3.weights"
+configPath    = "yolov3.cfg"
+LabelsPath    = "coco.names"
+Labels        = open(LabelsPath).read().strip().split("\n")
+confidenceDef = 0.5
+thresholdDef  = 0.3
+net           = (None)
+labelColors   = (None)
+layerNames    = (None)
 
 def initYoloV3():
-    global labelColors, layerNames, net
+    global weightsPath, configPath, LabelsPath, Labels, confidenceDef, thresholdDef, net, labelColors, layerNames
     
     # random color collection for each class label
     np.random.seed(42)
@@ -35,7 +51,7 @@ def counter(largeObject, localObject):
                 
 def toSpeech(objectArray):
     wroteObject = []
-    speech = "There are "
+    speech = "There is "
     for k in objectArray:
         if(k not in wroteObject):
             wroteObject.append(k);
@@ -113,82 +129,79 @@ def analyzeFrame(frame, displayBoundingBox = True, displayClassName = True, disp
         print(localObjects)
         oldBoxCount = len(boxes)
 
+def initialize():
+    global video_capture, frameSize, ip_field, W, H
+    # Camera Settings
+    camera_Width  = 640 # 1024 # 1280 # 640
+    camera_Heigth = 480 # 780  # 960  # 480
+    frameSize = (camera_Width, camera_Heigth)
 
-# Camera Settings
-camera_Width  = 640 # 1024 # 1280 # 640
-camera_Heigth = 480 # 780  # 960  # 480
-frameSize = (camera_Width, camera_Heigth)
+    print(ip_field.get())
+    video_capture = cv2.VideoCapture('http://' + ip_field.get() + '/video')
+    # time.sleep(2.0)
+    (W, H) = (None, None)
 
-video_capture = cv2.VideoCapture(1)
-# time.sleep(2.0)
-(W, H) = (None, None)
+def analysis_loop():
+    global video_capture, frameSize, ip_field, root
+    i = 0
+    lastAmount = len(objects)
+    detectionEnabled = True
 
-# YOLO Settings
-weightsPath   = "yolov3.weights"
-configPath    = "yolov3.cfg"
-LabelsPath    = "coco.names"
-Labels        = open(LabelsPath).read().strip().split("\n")
-confidenceDef = 0.5
-thresholdDef  = 0.3
-net           = (None)
-labelColors   = (None)
-layerNames    = (None)
-
-i = 0
-lastAmount = len(objects)
-detectionEnabled = True
-while True:
-    print("sleeping")
-    video_capture.release()
-    time.sleep(3);
-    video_capture = cv2.VideoCapture(1)
-    print("not sleeping")
+    display_img = tk.Label(app_frame, image = ImageTk.PhotoImage(Image.open("opencv_frame.png")))
+    display_img.pack(side = "bottom", fill = "both", expand = "yes")
+    while True:
+        print("sleeping")
+        # start_time = time.time()
+        
+        video_capture.release()
+        time.sleep(3);
+        video_capture = cv2.VideoCapture('http://' + ip_field.get() + '/video')
+        print("not sleeping")
     
-    # i = i + 1 
-    # start_time = time.time()
+        ret, frameOrig = video_capture.read()
+        frame = cv2.resize(frameOrig, frameSize)
+        cv2.imshow('GuideDog Image Recognition', frame)
+        img_name = "opencv_frame.png"
+        cv2.imwrite(img_name, frameOrig)
+        if(detectionEnabled):
+            analyzeFrame(frame)
 
-    # ctx = ssl.create_default_context()
-    # ctx.check_hostname = False
-    # ctx.verify_mode = ssl.CERT_NONE
-    # url = 'https://192.168.1.195:8080'
-    # imgResp = urllib3.urlopen(url)
-    # imgNp = np.array(bytearray(imgResp.read()), dtype=np.uint8)
-    # img = cv2.imdecode(imgNp, -1)
-    # cv2.imshow('temp',cv2.resize(img,(600,400)))
-    # q = cv2.waitKey(1)
-    # if q == ord("q"):
-    #     break;
+        
+        # cv2.imsave("annotated_image.png")
 
-    ret, frameOrig = video_capture.read()
-    frame = cv2.resize(frameOrig, frameSize)
-    img_name = "opencv_frame.png"
-    cv2.imwrite(img_name, frameOrig)
+        # key controller
+        key = cv2.waitKey(1) & 0xFF    
+        if key == ord("d"):
+            if (detectionEnabled == True):
+                detectionEnabled = False
+            else:
+                detectionEnabled = True
 
-    if(detectionEnabled):
-        analyzeFrame(frame)
-    # if(lastAmount != len(objects)):
-    #     lastAmount = len(objects);
-    #     # print(toSpeech(objects));
-    # if (time.time() - start_time ) > 0:
-    #     fpsInfo = "FPS: " + str(1.0 / (time.time() - start_time)) # FPS = 1 / time to process loop
-    #     font = cv2.FONT_HERSHEY_DUPLEX
-    #     cv2.putText(frame, fpsInfo, (10, 20), font, 0.4, (255, 255, 255), 1)
+        if key == ord("q"):
+            break
 
-    #cv2.imshow('@elbruno - YoloV3 Object Detection', frame)
+def run():
+    initialize()
+    analysis_loop()
 
-    # key controller
-    key = cv2.waitKey(1) & 0xFF    
-    if key == ord("d"):
-        if (detectionEnabled == True):
-            detectionEnabled = False
-        else:
-            detectionEnabled = True
+root = tk.Tk()
+root.resizable(False, False)
+root.title("GuideDog")
+canvas = tk.Canvas(root, height = 200, width = 500)
+canvas.pack()
+app_frame = tk.Frame(root)
+app_frame.place(relwidth = .95, relheight = .95, relx = .025, rely = .025)
+ip_field_label = tk.Label(app_frame, text = "Enter the IP address that appears when streaming begins on the IP Camera app.\n")
+ip_field_label.pack()
+ip_field = tk.Entry(app_frame, width = 30)
+ip_field.pack()
+start_button = tk.Button(app_frame, text = "Start", height = 1, width = 5, command = run)
+start_button.place(x = 210, y = 80)
 
-    if key == ord("q"):
-        break
-
-video_capture.release()
-cv2.destroyAllWindows()
+if __name__ == "__main__":
+    root.mainloop()
+    video_capture.release()
+    cv2.destroyAllWindows()
 
 
 
