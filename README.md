@@ -1,5 +1,5 @@
 # GuideDog
-# AI based narration camera for the visually impaired.**
+# AI based narration camera for the visually impaired.
 # HackDuke 2021
 
 1. Inspiration 
