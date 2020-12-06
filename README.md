@@ -1,9 +1,27 @@
 # GuideDog
 **AI based narration camera for the visually impaired.**
 
-HackDuke 2021
+HackDuke 2020
 
 ## Inspiration 
+
+People who are visually impaired face numerous challenges and inequalities including:
+- Navigating environments.
+- Recognizing and interacting with people and objects.
+- Facing a world not desgined for their particular needs in mind.
+
+Existing solutions those who are visually impaired rely on include:
+- Canes
+- Service Animals/Dog
+- Hearing and other senses
+- Audio GPS systems
+
+However, these options each contain their own unique set of pain points, including:
+- Limited modalities of perception/sensing
+- Static solutions can not update in real-time based on changing environments. Moving vehicles remain a constant danger.
+- Unreliable - Information presented is not always certain or accurate.
+- Expensive and sometimes require continuous maintenance (like a service animal)
+- Too Generalized - Details can not be captured (e.g. signs, scaffolds, trees).
 
 In an attempt to the help people with visual impairment, we wanted to create an app that is able to detect what is visible in front of a person and read out the objects to them
 
