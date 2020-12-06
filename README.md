@@ -12,7 +12,7 @@ Team: Franklin Boampong, Achilles Dabrowski, Samarth Lamba, Ryan Weeratunga, and
 People who are visually impaired face numerous challenges and inequalities including:
 - Navigating environments.
 - Recognizing and interacting with people and objects.
-- Facing a world not desgined for their particular needs in mind.
+- Facing a world not designed for their particular needs in mind.
 
 Existing solutions those who are visually impaired rely on include:
 - Canes
@@ -21,11 +21,11 @@ Existing solutions those who are visually impaired rely on include:
 - Audio GPS systems
 
 However, these options each contain their own unique set of pain points, including:
-- Limited modalities of perception/sensing
-- Static solutions can not update in real-time based on changing environments. Moving vehicles remain a constant danger.
-- Unreliable - Information presented is not always certain or accurate.
-- Expensive and sometimes require continuous maintenance (like a service animal)
-- Too Generalized - Details can not be captured (e.g. signs, scaffolds, trees).
+- **Limited** modalities of perception/sensing
+- **Static** solutions can not update in real-time based on changing environments. Moving vehicles remain a constant danger.
+- **Unreliable** - Information presented is not always certain or accurate.
+- **Expensive** and sometimes require continuous maintenance (like a service animal)
+- **Too Generalized** - Details can not be captured (e.g. signs, scaffolds, trees).
 
 In an attempt to the help people with visual impairment, we wanted to create an app that is able to detect what is visible in front of a person and read out the objects to them.
 **GuideDog will serve as a personal assistant for those who are visually impaired, and point out common objects and environmental features in an auditory way.**
@@ -36,11 +36,19 @@ GuideDog is a mobile application that utilizes machine learning to perform image
 
 Users can now walk around with added awareness of the objects and people around them. This increases convienence, minimizes safety risks, and reduces the disability inequality gap. Audio feature ensures that users can adequately understand objects in “sight” and anytime a new object appears, audio reminders are played.
 
+** Core Features **
+- Control via voice commands, to start/stop operation
+- Text-to-speech user interface read outs for those who can not use the display-based UI
+- Real-time image recognition with audio reminders of objects in the environment
+- Warnings of impeding danger
+
 ## How we built it
 
 The app was mainly developed with Python. We used a pre-trained visual object detection algorithm known as “You Only Look Once” (YOLOv3). This was trained on datasets containing 80 of the most commonly seen objects in daily life, such as people, vehicles, etc. The back end and front end were all in Python, with the user interface being implemented in Tkinter.
 
 User interface, interaction, and wireframe mockups were developed in Figma: https://www.figma.com/proto/fr6T3UQ8CobZIAjzMoTwS3/Untitled?node-id=5%3A323&scaling=scale-down
+
+Audio read-out and voice interaction features utilize Google's Text-to-Speech (gtts) API.
 
 ## How it works
 
@@ -56,7 +64,7 @@ V. User can interact with GuideDog through voice commands.
 
 ## Challenges we ran into
 
-The main challenges we ran into had to do with integrating the back end in Python to a front-end developed in flutter for easy launch of a mobile app. 
+The main challenges we ran into had to do with integrating the back end in Python to a front-end developed in Flutter for easy launch of a mobile app. 
 
 ## Accomplishments that we're proud of
 
