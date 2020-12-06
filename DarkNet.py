@@ -2,6 +2,8 @@ import numpy as np
 import time
 import cv2
 import os
+import urllib3
+import ssl
 from collections import Counter
 import gtts 
 from playsound import playsound 
@@ -115,7 +117,8 @@ def analyzeFrame(frame, displayBoundingBox = True, displayClassName = True, disp
 camera_Width  = 640 # 1024 # 1280 # 640
 camera_Heigth = 480 # 780  # 960  # 480
 frameSize = (camera_Width, camera_Heigth)
-video_capture = cv2.VideoCapture(1)
+
+video_capture = cv2.VideoCapture('http://admin:1234@192.168.1.195:8080/video')
 # time.sleep(2.0)
 (W, H) = (None, None)
 
@@ -136,6 +139,18 @@ detectionEnabled = True
 while True:
     # i = i + 1 
     # start_time = time.time()
+
+    # ctx = ssl.create_default_context()
+    # ctx.check_hostname = False
+    # ctx.verify_mode = ssl.CERT_NONE
+    # url = 'https://192.168.1.195:8080'
+    # imgResp = urllib3.urlopen(url)
+    # imgNp = np.array(bytearray(imgResp.read()), dtype=np.uint8)
+    # img = cv2.imdecode(imgNp, -1)
+    # cv2.imshow('temp',cv2.resize(img,(600,400)))
+    # q = cv2.waitKey(1)
+    # if q == ord("q"):
+    #     break;
 
     ret, frameOrig = video_capture.read()
     frame = cv2.resize(frameOrig, frameSize)
