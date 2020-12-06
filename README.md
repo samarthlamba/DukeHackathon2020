@@ -40,6 +40,7 @@ We learned a lot, from new Machine learning models to understanding the main pai
 
 We plan to launch the product even after the hackathon as it could make a big impact on the lives of users. Planned features:
 
+![Future Work](doc_assets/FutureWork.png)
 
 9. Installation
 
