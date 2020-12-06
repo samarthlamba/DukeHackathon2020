@@ -3,11 +3,6 @@
 HackDuke 2021
 
 1. Inspiration 
-Today, people with disabilities face numerous challenges in:
-
-- Navigating environments.
-- Recognizing and interacting with people and objects.
-- Facing a world not designed with their particular needs in mind.
 
 In an attempt to the help people with visual impairment, we wanted to create an app that is able to detect what is visible in front of a person and read out the objects to them
 
@@ -19,10 +14,20 @@ Audio feature ensures that users can adequately understand objects in â€œsightâ€
 
 3. How we built it
 
+The app was mainly developed with Python. The main AI/Machine learning model used was Dark Vision which made use of pre-trained data on object identification. The back end and front end were all in python.
+
 4. Challenges we ran into
+
+The main challenges we ran into had to do with integrating the back end in Python to a front-end developed in flutter for easy launch of a mobile app. 
 
 5. Accomplishments that we're proud of
 
+The main accomplishment we are proud of is the accuracy with which our feature could predict objects and also being able to build a whole product centered on social good was very rewarding for us
+
 6. What we learned
 
+We learned a lot, from new Machine learning models to understanding the main pain point on visually impaired individuals we understood a user need and solve the need with our product
+
 7. What's next
+
+We plan to launch the product even after the hackathon as it could make big impact on lives of users. The launch timeline is shown below:
