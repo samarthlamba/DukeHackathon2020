@@ -67,7 +67,7 @@ V. User can interact with GuideDog through voice commands.
 
 ## Challenges we ran into
 
-The main challenges we ran into had to do with integrating the back end in Python to a front-end developed in Flutter for easy launch of a mobile app. In addition, improving the performane of the application for mobile devices was difficult as the algorithm was not designed for low-power edge mobile devices.
+The main challenges we ran into had to do with integrating the back end in Python to a front-end developed in Flutter for easy launch of a mobile app. In addition, improving the performance of the application for mobile devices was difficult as the algorithm was not designed for low-power edge mobile devices.
 
 ## Accomplishments that we're proud of
 
@@ -75,7 +75,7 @@ The main accomplishment we are proud of is the accuracy with which our feature c
 
 ## What we learned
 
-We learned a lot, from new Machine learning models to understanding the main pain point on visually impaired individuals we understood a user need and solve the need with our product
+We learned a lot, from new Machine learning models to understanding the main pain point on visually impaired individuals we understood a user need and solve the need with our product.
 
 ## What's next
 
