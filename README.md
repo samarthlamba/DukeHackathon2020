@@ -1,7 +1,9 @@
 # GuideDog
 **AI based narration camera for the visually impaired.**
 
-HackDuke 2020
+### HackDuke 2020, Inequality Track.
+
+Team: Franklin Boampong, Achilles Dabrowski, Samarth Lamba, Ryan Weeratunga, and Alex Xu
 
 ![Future Work](doc_assets/Homepage.png)
 
@@ -25,13 +27,14 @@ However, these options each contain their own unique set of pain points, includi
 - Expensive and sometimes require continuous maintenance (like a service animal)
 - Too Generalized - Details can not be captured (e.g. signs, scaffolds, trees).
 
-In an attempt to the help people with visual impairment, we wanted to create an app that is able to detect what is visible in front of a person and read out the objects to them
+In an attempt to the help people with visual impairment, we wanted to create an app that is able to detect what is visible in front of a person and read out the objects to them.
+**GuideDog will serve as a personal assistant for those who are visually impaired, and point out common objects and environmental features in an auditory way.**
 
 ## What it does 
 
-Utilizes Machine Learning and image recognition to determine what objects are in front of a user. 
-Users can now walk around knowing that the world around them
-Audio feature ensures that users can adequately understand objects in “sight” and anytime a new object appears, audio is played
+GuideDog is a mobile application that utilizes machine learning to perform image recognition in real-time from the user's mobile phone camera. The system detects objects that are in front of a user. The application is designed to be used when the user is walking around, either outdoors or indoors.
+
+Users can now walk around with added awareness of the objects and people around them. This increases convienence, minimizes safety risks, and reduces the disability inequality gap. Audio feature ensures that users can adequately understand objects in “sight” and anytime a new object appears, audio reminders are played.
 
 ## How we built it
 
