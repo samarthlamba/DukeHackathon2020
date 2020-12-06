@@ -46,6 +46,9 @@ Users can now walk around with added awareness of the objects and people around 
 
 The app was mainly developed with Python. We used a pre-trained visual object detection algorithm known as “You Only Look Once” (YOLOv3). This was trained on datasets containing 80 of the most commonly seen objects in daily life, such as people, vehicles, etc. The back end and front end were all in Python, with the user interface being implemented in Tkinter.
 
+Testing was conducted for the image recognition algorithm on a Samsung laptop test rig, as shown below:
+![Future Work](doc_assets/testrig.jpg)
+
 User interface, interaction, and wireframe mockups were developed in Figma: https://www.figma.com/proto/fr6T3UQ8CobZIAjzMoTwS3/Untitled?node-id=5%3A323&scaling=scale-down
 
 Audio read-out and voice interaction features utilize Google's Text-to-Speech (gtts) API.
