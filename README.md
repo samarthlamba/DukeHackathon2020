@@ -48,6 +48,7 @@ The app was mainly developed with Python. We used a pre-trained visual object de
 
 Testing was conducted for the image recognition algorithm on a Samsung laptop test rig, as shown below:
 ![Future Work](doc_assets/testrig.jpg)
+![Future Work](doc_assets/pythontesting.png)
 
 User interface, interaction, and wireframe mockups were developed in Figma: https://www.figma.com/proto/fr6T3UQ8CobZIAjzMoTwS3/Untitled?node-id=5%3A323&scaling=scale-down
 
