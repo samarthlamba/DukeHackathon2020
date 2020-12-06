@@ -89,7 +89,7 @@ def analyzeFrame(frame, displayBoundingBox = True, displayClassName = True, disp
                 confidences.append(float(confidence))
                 classIDs.append(classID)
 
-    if(len(boxes) != oldBoxCount): 
+    if(True): 
         idxs = cv2.dnn.NMSBoxes(boxes, confidences, confidenceDef, thresholdDef)
 
         if len(idxs) > 0:
@@ -108,8 +108,8 @@ def analyzeFrame(frame, displayBoundingBox = True, displayClassName = True, disp
                 #     cv2.putText(frame, text, (x, y - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
                 localObjects.append(Labels[classIDs[i]])
                 counter(objects, localObjects)
-        if(len(localObjects) != oldLocalObjectsLength):   
-            toSpeech(localObjects)
+        #if(len(localObjects) != oldLocalObjectsLength):   
+        toSpeech(localObjects)
         print(localObjects)
         oldBoxCount = len(boxes)
 
@@ -119,7 +119,7 @@ camera_Width  = 640 # 1024 # 1280 # 640
 camera_Heigth = 480 # 780  # 960  # 480
 frameSize = (camera_Width, camera_Heigth)
 
-video_capture = cv2.VideoCapture('http://admin:1234@192.168.1.195:8080/video')
+video_capture = cv2.VideoCapture(1)
 # time.sleep(2.0)
 (W, H) = (None, None)
 
@@ -138,6 +138,12 @@ i = 0
 lastAmount = len(objects)
 detectionEnabled = True
 while True:
+    print("sleeping")
+    video_capture.release()
+    time.sleep(3);
+    video_capture = cv2.VideoCapture(1)
+    print("not sleeping")
+    
     # i = i + 1 
     # start_time = time.time()
 
@@ -155,6 +161,8 @@ while True:
 
     ret, frameOrig = video_capture.read()
     frame = cv2.resize(frameOrig, frameSize)
+    img_name = "opencv_frame.png"
+    cv2.imwrite(img_name, frameOrig)
 
     if(detectionEnabled):
         analyzeFrame(frame)
