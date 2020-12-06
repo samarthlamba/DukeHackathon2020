@@ -38,14 +38,20 @@ Users can now walk around with added awareness of the objects and people around 
 
 ## How we built it
 
-The app was mainly developed with Python. The main AI/Machine learning model used was “You Only Look Once” (YOLO v3) which made use of pre-trained data on object identification. The back end and front end were all in python.
+The app was mainly developed with Python. We used a pre-trained visual object detection algorithm known as “You Only Look Once” (YOLOv3). This was trained on datasets containing 80 of the most commonly seen objects in daily life, such as people, vehicles, etc. The back end and front end were all in Python, with the user interface being implemented in Tkinter.
+
+User interface, interaction, and wireframe mockups were developed in Figma: https://www.figma.com/proto/fr6T3UQ8CobZIAjzMoTwS3/Untitled?node-id=5%3A323&scaling=scale-down
 
 ## How it works
 
 I. Images are continuously captured by a local (mobile phone) or IP-connected camera.
+
 II. Utilizes an image recognition algorithm that utilizes a pre-trained model based on YOLOv3. (Recognizes 80 of the most commonly found objects in daily life.)
+
 III. Objects are detected in real-time and sent to the Google speech API that generates a voice-based message.
+
 IV. Audio playback happens immediately to alert the user.
+
 V. User can interact with GuideDog through voice commands.
 
 ## Challenges we ran into
