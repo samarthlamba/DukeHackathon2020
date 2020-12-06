@@ -3,7 +3,9 @@
 
 HackDuke 2020
 
-## Inspiration 
+![Future Work](doc_assets/Homepage.png)
+
+## Inspiration
 
 People who are visually impaired face numerous challenges and inequalities including:
 - Navigating environments.
