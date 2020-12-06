@@ -36,7 +36,7 @@ GuideDog is a mobile application that utilizes machine learning to perform image
 
 Users can now walk around with added awareness of the objects and people around them. This increases convienence, minimizes safety risks, and reduces the disability inequality gap. Audio feature ensures that users can adequately understand objects in “sight” and anytime a new object appears, audio reminders are played.
 
-** Core Features **
+**Core Features**
 - Control via voice commands, to start/stop operation
 - Text-to-speech user interface read outs for those who can not use the display-based UI
 - Real-time image recognition with audio reminders of objects in the environment
@@ -64,11 +64,11 @@ V. User can interact with GuideDog through voice commands.
 
 ## Challenges we ran into
 
-The main challenges we ran into had to do with integrating the back end in Python to a front-end developed in Flutter for easy launch of a mobile app. 
+The main challenges we ran into had to do with integrating the back end in Python to a front-end developed in Flutter for easy launch of a mobile app. In addition, improving the performane of the application for mobile devices was difficult as the algorithm was not designed for low-power edge mobile devices.
 
 ## Accomplishments that we're proud of
 
-The main accomplishment we are proud of is the accuracy with which our feature could predict objects and also being able to build a whole product centered on social good was very rewarding for us
+The main accomplishment we are proud of is the accuracy with which our feature could predict objects and also being able to build a whole product centered on social good was very rewarding for us.
 
 ## What we learned
 
@@ -76,7 +76,13 @@ We learned a lot, from new Machine learning models to understanding the main pai
 
 ## What's next
 
-We plan to launch the product even after the hackathon as it could make a big impact on the lives of users. Planned features:
+According to the challenges we ran into while developing this project, we plan on improving/adding the following items in the future:
+- Support for more languages other than English (to have greater reach to our users)
+- Migrate processing to the Cloud (to improve classification performance)
+- Expand library of recognized objects
+- Add types of audio reminders, including improving the performance of positional notifications.
+
+In addition, we plan to launch the product even after the hackathon as it could make a big impact on the lives of users:
 
 ![Future Work](doc_assets/FutureWork.png)
 
