@@ -3,6 +3,11 @@
 HackDuke 2021
 
 1. Inspiration 
+Today, people with disabilities face numerous challenges in:
+
+- Navigating environments.
+- Recognizing and interacting with people and objects.
+- Facing a world not designed with their particular needs in mind.
 
 In an attempt to the help people with visual impairment, we wanted to create an app that is able to detect what is visible in front of a person and read out the objects to them
 
